@@ -1,0 +1,220 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} <title>articles details</title> {% endblock title %}
+
+{% block stylesheet %}
+<style>
+.theme-bg-light {
+    background: #e3e3e3 !important;
+    margin-bottom: 10px;
+	margin-left: 260px;
+}
+img {
+    vertical-align: middle;
+    border-style: none;
+    max-width: 700px;
+}
+.profile-section .bio {
+    font-size: 0.880rem;
+    text-align: justify;
+}
+.cta-section .heading {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #0ec789;
+}
+.blog-list .item .title {
+    color: #5FCB71 !important;
+    font-size: 38px !important;
+    text-decoration: none;
+}
+.meta span {
+    display: inline-block;
+    font-size: 18px;
+    text-align: justify;
+    font-weight: 500;
+    color: #016d87;
+}
+.meta span a {
+    color: #015f75;
+}
+.blog-list .item .intro {
+    font-size: 1.2rem;
+}
+.nav-link {
+    display: block;
+    padding: .4rem 1rem !important;
+	text-decoration: none!important;
+}
+.intro1{
+    color: #057892 !important;
+}
+
+table {
+    background-color: transparent !important;
+    width: 950px;
+}
+td, th {
+    padding: 10px !important;
+}
+.meta span {
+    display: inline-block;
+    font-size: 18px;
+    text-align: justify;
+    font-weight: 500;
+    color: #016d87 !important;
+}
+.meta span a {
+    color: #015f75;
+}
+p {
+    margin-top: 0 !important;
+    margin-bottom: 1rem;
+    text-align: justify !important;
+}
+.intro1{
+    color: #057892 !important;
+}
+.main-wrapper .container {
+    max-width: 980px;
+}
+.comment{
+    text-align: center !important;
+    color: #057892;
+}
+.jumbotron {
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+    background-color: #ededed;
+    border-radius: .3rem;
+    border-radius: 10px;
+}
+.comment{
+    text-align: center !important;
+    color: #057892;
+}
+.user{
+	font-size: 30px;
+	font-weight: bold;
+	padding: 5px 10px;
+	color: green;
+	background: white;
+	border-radius: 5px;
+
+}
+.btn-success {
+    color: #fff !;
+    background-color: #28a745;
+    border-color: #28a745;
+    margin-bottom: 14px;
+}
+.span{
+	color: red;
+}
+
+</style>
+{% endblock stylesheet %}
+
+
+{% block profile %}
+	 {% for x in author %}
+		<header class="header text-center">	    
+			<h1 class="blog-name pt-lg-4 mb-0"><a href="index.html">{{x.title}}</a></h1>
+			
+			<nav class="navbar navbar-expand-lg navbar-dark" >
+			
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div id="navigation" class="collapse navbar-collapse flex-column" >
+					<div class="profile-section pt-3 pt-lg-0">
+						<img class="profile-image mb-3 rounded-circle mx-auto" src="{{x.image.url}}" alt="image" >			
+						
+						<div class="bio mb-3">{{x.details}} &nbsp; <span><a href="{% url 'myself' %}">Find out more about me</a></span></div><!--//bio-->
+						<ul class="social-list list-inline py-3 mx-auto">
+							<li class="list-inline-item"><a target="_blank" href="{{x.twitter}}"><i class="fab fa-twitter fa-fw"></i></a></li>
+							<li class="list-inline-item"><a target="_blank" href="{{x.facebook}}"><i class="fab fa-facebook fa-fw"></i></a></li>
+							<li class="list-inline-item"><a target="_blank" href="{{x.linkdin}}"><i class="fab fa-linkedin-in fa-fw"></i></a></li>
+							<li class="list-inline-item"><a target="_blank" href="{{x.github}}"><i class="fab fa-github-alt fa-fw"></i></a></li>
+							<li class="list-inline-item"><a target="_blank" href="{{x.stack_overflow}}"><i class="fab fa-stack-overflow fa-fw"></i></a></li>
+							
+						</ul><!--//social-list-->
+						<hr> 
+					</div><!--//profile-section-->
+					
+					<ul class="navbar-nav flex-column text-left">
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'index' %}"><i class="fas fa-home fa-fw mr-2"></i>Blog Home <span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'create-article' %}"><i class="fas fa-bookmark fa-fw mr-2"></i> Create Blog Post</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'show_category' %}"><i class="fas fa-user fa-fw mr-2"></i>Category</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'myself' %}"><i class="fas fa-user fa-fw mr-2"></i>About Me</a>
+						</li>
+					</ul>
+					
+					<div class="my-2 my-md-3">
+						<a class="btn btn-primary" href="https://themes.3rdwavemedia.com/" target="_blank">Get in Touch</a>
+					</div>
+				</div>
+			</nav>
+		</header>
+	{% endfor %}
+{% endblock profile %}
+
+
+{% block head %}
+<section class="cta-section theme-bg-light py-5">
+		    <div class="container text-center">
+				{% if request.user.is_authenticated %}
+				<span class='user'><span class='span'>Hello,</span> {{request.user}}</span> 
+				&ensp; <span><a href="{% url 'logout' %}" class='btn btn-success' >Logout Here!</a></span>
+
+				{% else %}
+				<span><a href="{% url 'login' %}" class='btn btn-success'>Login Here!</a></span>
+				{% endif %}
+
+			    <h2 class="heading">DevBlog - A Blog Template Made For Developers</h2>
+			    <div class="intro1">Welcome to my blog. Subscribe and get my latest blog post in your inbox.</div>
+			    <form class="signup-form form-inline justify-content-center pt-3">
+                    <div class="form-group">
+                        <label class="sr-only" for="semail">Your email</label>
+                        <input type="email" id="semail" name="semail1" class="form-control mr-md-1 semail" placeholder="Enter email">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Subscribe</button> &nbsp; &nbsp;  <span><a class="btn btn-primary" href="{% url 'index' %}">Home</a></span>
+                </form>
+		    </div><!--//container-->
+	    </section>
+{% endblock head %}
+
+{% block content %} <br><br>
+<div class="main-wrapper">
+<section class="blog-list px-3 py-5 p-md-5">
+        <div class="item mb-5">
+            <div class="media">
+                <div class="container">
+					<div class="media-body">
+					 <img class="image" src="{{post.image.url}}" alt="image"><br><br><br>
+                    <h3 class="title mb-1">{{post.title}}</h3>
+                    <div class="meta mb-1"><span class="date"> <i class="far fa-calendar-alt"></i> Post Published - {{post.published}}</span><span class="time"> <i class="fas fa-user-circle"></i> Article Author - {{post.artcle_author.name.get_full_name}}</span> <br> <span class="comment"> <i class="far fa-list-alt"></i> Post Category - <a href="{% url 'category' name=post.category %}">{{post.category}}</a></span></div> <br> 
+                    <div class="intro"> {{post.body | safe}}</div> <br> <br>
+
+					<div class="jumbotron">
+					<h4 class='comment'>Comment Section Here!</h4> <br>
+					<div class="fb-comments" data-href="http://127.0.0.1:8000/article/{{post.id}}" data-width="" data-numposts="5"></div>
+					<div class="fb-like" data-href="http://127.0.0.1:8000/article/{{post.id}}" data-width="" data-layout="button_count" data-action="like" data-size="large" data-share="true"></div>
+					<div class="fb-share-button" data-href="http://127.0.0.1:8000/article/{{post.id}}" data-layout="button_count" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A8000%2Farticle%2F10%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+					</div>
+                </div><!--//media-body-->
+				</div>
+            </div><!--//media-->
+        </div><!--//item-->
+ </section>
+</div>
+{% endblock content %}

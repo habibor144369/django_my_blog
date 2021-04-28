@@ -1,0 +1,220 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+<title>About Me</title>
+{% endblock title %}
+
+{% block stylesheet %}
+<style>
+.theme-bg-light {
+    background: #e3e3e3 !important;
+    margin-left: 260px;
+}
+.nav-link {
+    display: block;
+    padding: .4rem 1rem !important;
+	text-decoration: none!important;
+}
+.profile-section .bio {
+    font-size: 0.875rem !important;
+    text-align: justify;
+}
+.intro{
+    color: #057892;
+}
+.cta-section .heading {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #0ec789;
+}
+.image {
+    vertical-align: middle;
+    border-style: none;
+    max-width: 320px;
+    border-radius: 10px;
+    display: inline-block;
+	float: left;
+}
+.jumbotron {
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+    background-color: #ededed;
+    border-radius: .3rem;
+    border-radius: 10px;
+	margin-top: 40px;
+}
+.comment{
+    text-align: center !important;
+    color: #057892;
+}
+.main-wrapper .container {
+    max-width: 980px;
+}
+.social-list-2 a {
+    width: 32px;
+    height: 32px;
+    padding-top: 5px;
+    display: inline-block;
+    text-align: center;
+    border-radius: 50%;
+    transition: all 0.4s ease-in-out;
+    background-color: #d7dedd;
+}
+.data {
+    padding: 0px 40px;
+    display: inline-block;
+    font-size: 20px;
+    font-weight: 500;
+    color: #0b7858;
+}
+.data a {
+    color: white;
+    text-decoration: none;
+    background: #0b7858;
+    padding: 9px;
+    border-radius: 6px;
+	margin-top: 10px;
+}
+.blog-list .item .title {
+    font-size: 2rem;
+    margin-top: 21px;
+    color: #0b7858;
+}
+.blog-list .item .intro {
+    font-size: 1.3rem;
+    text-align: justify;
+}
+
+.data h2{
+    font-weight: bold;
+    color: #0d9ea3;
+}
+</style>
+{% endblock stylesheet %}
+
+
+{% block head %}
+        <section class="cta-section theme-bg-light py-5">
+		    <div class="container text-center">
+			    <h2 class="heading">DevBlog - A Blog Template Made For Developers</h2>
+			    <div class="intro">Welcome to my blog. Subscribe and get my latest blog post in your inbox.</div>
+			    <form class="signup-form form-inline justify-content-center pt-3">
+                    <div class="form-group">
+                        <label class="sr-only" for="semail">Your email</label>
+                        <input type="email" id="semail" name="semail1" class="form-control mr-md-1 semail" placeholder="Enter email">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Subscribe</button> &nbsp; &nbsp;  <span><a class="btn btn-primary" href="{% url 'index' %}">Home</a></span>
+                </form>
+		    </div><!--//container-->
+	    </section>
+{% endblock head %}
+
+
+
+{% block profile %}
+	{% for x in author %}
+		<header class="header text-center">	    
+			<h1 class="blog-name pt-lg-4 mb-0"><a href="{% url 'index' %}">{{x.title}}</a></h1>
+			
+			<nav class="navbar navbar-expand-lg navbar-dark" >
+			
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div id="navigation" class="collapse navbar-collapse flex-column" >
+					<div class="profile-section pt-3 pt-lg-0">
+						<img class="profile-image mb-3 rounded-circle mx-auto" src="{{x.image.url}}" alt="image" >			
+						
+						<div class="bio mb-3">{{x.details}} &nbsp; <span><a href="{% url 'myself' %}">Find out more about me</a></span></div><!--//bio-->
+						<ul class="social-list list-inline py-3 mx-auto">
+							<li class="list-inline-item"><a target="_blank" href="{{x.twitter}}"><i class="fab fa-twitter fa-fw"></i></a></li>
+							<li class="list-inline-item"><a target="_blank" href="{{x.facebook}}"><i class="fab fa-facebook fa-fw"></i></a></li>
+							<li class="list-inline-item"><a target="_blank" href="{{x.linkdin}}"><i class="fab fa-linkedin-in fa-fw"></i></a></li>
+							<li class="list-inline-item"><a target="_blank" href="{{x.github}}"><i class="fab fa-github-alt fa-fw"></i></a></li>
+							<li class="list-inline-item"><a target="_blank" href="{{x.stack_overflow}}"><i class="fab fa-stack-overflow fa-fw"></i></a></li>
+							
+						</ul><!--//social-list-->
+						<hr> 
+					</div><!--//profile-section-->
+					
+					<ul class="navbar-nav flex-column text-left">
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'index' %}"><i class="fas fa-home fa-fw mr-2"></i>Blog Home <span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'create-article' %}"><i class="fas fa-bookmark fa-fw mr-2"></i> Create Blog Post</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'show_category' %}"><i class="fas fa-user fa-fw mr-2"></i>Category</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'myself' %}"><i class="fas fa-user fa-fw mr-2"></i>About Me</a>
+						</li>
+					</ul>
+					
+					<div class="my-2 my-md-3">
+						<a class="btn btn-primary" href="https://themes.3rdwavemedia.com/" target="_blank">Get in Touch</a>
+					</div>
+				</div>
+			</nav>
+		</header>
+	{% endfor %}
+{% endblock profile %}
+
+
+{% block content %}
+<div class="main-wrapper">
+<section class="blog-list px-3 py-5 p-md-5">
+        <div class="item mb-5">
+            <div class="media">
+                <div class="container">
+					{% for x in about %}
+					<div class="media-body">
+						<div class="image">
+						<img class="image" src="{{x.image.url}}" alt="image">
+						</div>
+
+						<div class="data">
+						<h2>My data</h2>
+						<span>Name : {{x.name_1}} {{x.name_2}}</span>
+						<p>Email : {{x.email}}</p>
+						<p>Contact : {{x.phone_1}}</p>
+						<p>Contact : {{x.phone_1}}</p>
+						<span>Here is my resume, Here you will see what skills I have!</span> <br> <br>
+						<a target="_blank" href="{{x.resume.url}}">Download</a>
+						</div> <br> <br>
+
+						
+						<div class="bio mb-3">
+							<ul class="social-list-2 list-inline py-3 mx-auto">
+								<li class="list-inline-item"><a target="_blank" href="{{x.twitter}}"><i class="fab fa-twitter fa-fw"></i></a></li>
+								<li class="list-inline-item"><a target="_blank" href="{{x.facebook}}"><i class="fab fa-facebook fa-fw"></i></a></li>
+								<li class="list-inline-item"><a target="_blank" href="{{x.linkdin}}"><i class="fab fa-linkedin-in fa-fw"></i></a></li>
+								<li class="list-inline-item"><a target="_blank" href="{{x.github}}"><i class="fab fa-github-alt fa-fw"></i></a></li>
+								<li class="list-inline-item"><a target="_blank" href="{{x.stack_overflow}}"><i class="fab fa-stack-overflow fa-fw"></i></a></li>
+							</ul><!--//social-list-->
+						<hr> 
+
+						<div class="other">
+							<h3 class="title mb-1">{{x.title}}</h3>
+							<div class="intro"> {{x.details | safe}}
+						</div> 
+					
+
+							<div class="jumbotron">
+								<h4 class='comment'>Comment Section Here!</h4> <br>
+								<div class="fb-comments" data-href="http://127.0.0.1:8000/about-me/{{x}}" data-width="" data-numposts="5"></div>
+								<div class="fb-like" data-href="http://127.0.0.1:8000/about-me/{{x}}" data-width="" data-layout="button_count" data-action="like" data-size="large" data-share="true"></div>
+								<div class="fb-share-button" data-href="http://127.0.0.1:8000/about-me/{{x}}" data-layout="button_count" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A8000%2Farticle%2F10%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+							</div>
+						</div>
+                	</div><!--//media-body-->
+					{% endfor %}
+				</div>
+            </div><!--//media-->
+        </div><!--//item-->
+ </section>
+</div>
+{% endblock content %}

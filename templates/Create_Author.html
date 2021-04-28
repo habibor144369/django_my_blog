@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+
+{% block stylesheet %}
+<style>
+input {
+    overflow: visible;
+    width: 300px;
+}
+</style>
+{% endblock stylesheet %}
+
+{% block title %}
+<title>Create_Author</title>
+{% endblock title %}
+
+
+{% block content %}
+<div class="container">
+<h1>Create Author Here ! </h1> <br>
+{% if request.user.is_staff or request.user.is_superuser %}
+    <form method="POST" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.media }}
+    {{ form.as_p }}
+    <input type="submit" name="submit" value="Submit" class="btn btn-success">
+    </form>
+
+{% else %}
+<h2>Sorry, only can access superuser!</h2>
+{% endif %}
+</div> <br><br>
+{% endblock content %}
+

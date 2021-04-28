@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>show_category</title>
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+<h3>My All Category Here !</h3> <br><br>
+
+
+{% for x in category %}
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col"> <a href="{% url 'category' x.name %}">{{forloop.counter}} &nbsp; {{x.name}}</a> </th>
+    </tr>
+  </thead>
+{% endfor %}
+</div>
+{% endblock content %}

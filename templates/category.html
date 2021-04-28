@@ -1,0 +1,318 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} <title>Hello Programmer!</title>{% endblock title %}
+
+
+{% block stylesheet %}
+<style>
+.theme-bg-light {
+    background: #e3e3e3 !important;
+    margin-left: 260px;
+}
+.btn {
+    font-weight: bold;
+    padding: .375rem 1rem;
+    height: 2.75rem;
+    transition: all 0.4s ease-in-out;
+}
+.nav-link {
+    display: block;
+    padding: .4rem 1rem !important;
+	text-decoration: none!important;
+}
+.profile-section .bio {
+    font-size: 0.880rem;
+    text-align: justify;
+}
+.blog-nav .nav-link {
+    background: #5FCB71;
+    color: #fff;
+    font-size: 1rem;
+    padding: 1rem !important;
+    font-weight: bold;
+    position: relative;
+}
+.blog-list .item .title a {
+    color: #008bad;
+    text-decoration: none !important;
+}
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    text-align: justify;
+    font-size: 14px;
+}
+.meta span {
+    display: inline-block;
+    font-size: 14px;
+    text-align: justify;
+    font-weight: 500;
+    color: #016d87;
+}
+.meta span a {
+    color: #015f75;
+}
+.blog-list .item .title a {
+    color: #008bad;
+    text-decoration: none !important;
+    font-size: 23px;
+}
+.blog-list .item .post-thumb {
+    max-width: 160px !important;
+    border-radius: 2px;
+}
+.blog-list .item .more-link {
+    font-size: 0.8125rem;
+    font-weight: 500;
+}
+.blog-list .item .more-link {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    height: 35px !important;
+}
+.media {
+    display: flex;
+    align-items: flex-start;
+    background: #f2f2f2 !important;
+    padding: 20px !important;
+    border-radius: 5px;
+    margin: 50px 0px !important;
+    box-shadow: 3px 3px 25px 5px lightgray !important;
+}
+.cta-section .heading {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #0ec789;
+}
+.intro{
+    color: #057892;
+}
+
+.media {
+    box-shadow: 3px 3px 15px 5px lightgray !important;
+}
+.info{
+    color: green;
+    padding: 20px;
+    font-size: 20px;
+    background: lightblue;
+    text-align: center;
+	}
+.user{
+	font-size: 30px;
+	font-weight: bold;
+	padding: 5px 10px;
+	color: green;
+	background: white;
+	border-radius: 5px;
+
+}
+.btn-success {
+    color: #fff !;
+    background-color: #28a745;
+    border-color: #28a745;
+    margin-bottom: 14px;
+}
+.span{
+	color: red;
+}
+.cat{
+    text-align: center;
+    color: #057892;
+    background: #e3e3e3;
+    padding: 20px;
+}
+.pasination .nav-link{
+    display: block;
+    padding: .4rem 1rem !important;
+    text-decoration: none!important;
+    background: #28a745;
+    margin: 10px;
+    display: inline-block;
+	color: white;
+	}	
+.current{
+    color: green;
+    font-weight: bold;
+}
+.pasination .nav-link{
+    display: block;
+    padding: .4rem 1rem !important;
+    text-decoration: none!important;
+    background: #28a745;
+    margin: 10px;
+    display: inline-block;
+    color: white;
+    }	
+    .current{
+        color: green;
+        font-weight: bold;
+    }
+</style>	
+{% endblock stylesheet %}
+
+{% block profile %}
+	 {% for x in author %}
+		<header class="header text-center">	    
+			<h1 class="blog-name pt-lg-4 mb-0"><a href="{% url 'index' %}">{{x.title}}</a></h1>
+			
+			<nav class="navbar navbar-expand-lg navbar-dark" >
+			
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div id="navigation" class="collapse navbar-collapse flex-column" >
+					<div class="profile-section pt-3 pt-lg-0">
+						<img class="profile-image mb-3 rounded-circle mx-auto" src="{{x.image.url}}" alt="image" >			
+						
+						<div class="bio mb-3">{{x.details}} &nbsp; <span><a href="about.html">Find out more about me</a></span></div><!--//bio-->
+						<ul class="social-list list-inline py-3 mx-auto">
+							<li class="list-inline-item"><a target="_blank" href="{{x.twitter}}"><i class="fab fa-twitter fa-fw"></i></a></li>
+							<li class="list-inline-item"><a target="_blank" href="{{x.facebook}}"><i class="fab fa-facebook fa-fw"></i></a></li>
+							<li class="list-inline-item"><a target="_blank" href="{{x.linkdin}}"><i class="fab fa-linkedin-in fa-fw"></i></a></li>
+							<li class="list-inline-item"><a target="_blank" href="{{x.github}}"><i class="fab fa-github-alt fa-fw"></i></a></li>
+							<li class="list-inline-item"><a target="_blank" href="{{x.stack_overflow}}"><i class="fab fa-stack-overflow fa-fw"></i></a></li>
+							
+						</ul><!--//social-list-->
+						<hr> 
+					</div><!--//profile-section-->
+					
+					<ul class="navbar-nav flex-column text-left">
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'index' %}"><i class="fas fa-home fa-fw mr-2"></i>Blog Home <span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'create-article' %}"><i class="fas fa-bookmark fa-fw mr-2"></i> Create Blog Post</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'show_category' %}"><i class="fas fa-user fa-fw mr-2"></i>Category</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'myself' %}"><i class="fas fa-user fa-fw mr-2"></i>About Me</a>
+						</li>
+					</ul>
+					
+					<div class="my-2 my-md-3">
+						<a class="btn btn-primary" href="https://themes.3rdwavemedia.com/" target="_blank">Get in Touch</a>
+					</div>
+				</div>
+			</nav>
+		</header>
+	{% endfor %}
+{% endblock profile %}
+
+
+{% block head %}
+	<section class="cta-section theme-bg-light py-5">
+	
+		    <div class="container text-center">
+			    {% if request.user.is_authenticated %}
+				<span class='user'><span class='span'>Hello,</span> {{request.user}}</span> 
+				&ensp; <span><a href="{% url 'logout' %}" class='btn btn-success' >Logout Here!</a></span>
+
+				{% else %}
+				<span><a href="{% url 'login' %}" class='btn btn-success'>Login Here!</a></span>
+				{% endif %}
+
+
+			    <h2 class="heading">DevBlog - A Blog Template Made For Developers</h2>
+			    <div class="intro">Welcome to my blog. Subscribe and get my latest blog post in your inbox.</div>
+			    <form class="signup-form form-inline justify-content-center pt-3">
+                    <div class="form-group">
+                        <label class="sr-only" for="semail">Your email</label>
+                        <input type="email" id="semail" name="semail1" class="form-control mr-md-1 semail" placeholder="Enter email">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Subscribe</button> 
+                </form>
+				
+		    </div><!--//container-->
+	    </section>
+{% endblock head %}
+
+
+{% block content %}
+
+	 <div class="main-wrapper">
+	    <section class="blog-list px-3 py-5 p-md-5">
+		    <div class="container">
+            <h4 class="cat"> Post Category : {{cat.name}}</h4>
+			    {% for x in post %}
+					<div class="item mb-5">
+						<div class="media">
+							<img class="mr-3 img-fluid post-thumb d-none d-md-flex" src="{{x.image.url}}" alt="image">
+							<div class="media-body">
+								<h3 class="title mb-1"><a href="{% url 'article_details' id=x.id slug=x.slug %}">{{x.title}}</a></h3>
+								<div class="meta mb-1"><span class="date"> <i class="far fa-calendar-alt"></i> Post Published - {{x.published}}</span><span class="time"> <i class="fas fa-user-circle"></i> Article Author - {{x.artcle_author.name.get_full_name}}</span> <span class="comment"> <i class="far fa-list-alt"></i> Post Category - <a href="{% url 'category' name=x.category %}">{{x.category}}</a></span></div>
+								<div class="intro hello1"> {{x.body|truncatechars:200 | safe}}</div>
+								<a class="more-link btn btn-success" href="{% url 'article_details' id=x.id slug=x.slug %}">Read more &rarr;</a> &nbsp;
+								<div class="my-3 fb-like" data-href="http://127.0.0.1:8000/article/{{x.id}}" data-width="" data-layout="button_count" data-action="like" data-size="large" data-share="true"></div>
+								<div class="fb-share-button" data-href="http://127.0.0.1:8000/article/{{x.id}}" data-layout="button_count" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A8000%2Farticle%2F10%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+							</div><!--//media-body-->
+						</div><!--//media-->
+					</div><!--//item-->
+				{% endfor %}
+		    </div>
+
+
+	<div class="container">
+		<div class="pagination">
+			<span class="step-links">
+				{% if post.has_previous %}
+					<span class="pasination">
+					<a class="nav-link-next nav-item nav-link rounded" href="?page=1"> &laquo; First</a>
+					<a class="nav-link-prev nav-item nav-link rounded" href="?page={{ post.previous_page_number }}"> <i class="arrow-prev fas fa-long-arrow-alt-left"></i> Previous</a>
+					</span>
+				{% endif %}
+
+				<span class="current">
+				PAGE {{ post.number }} OF {{ post.paginator.num_pages }}
+				</span>
+
+				{% if post.has_next %}
+					<span class="pasination">
+					<a class="nav-link-next nav-item nav-link rounded" href="?page={{ post.next_page_number }}">Next<i class="arrow-next fas fa-long-arrow-alt-right"></i></a>
+					<a class="nav-link-next nav-item nav-link rounded" href="?page={{ post.paginator.num_pages }}"> Last &raquo;</a>
+					</span>
+				{% endif %}
+			</span>
+		</div>
+	</div>
+
+
+	    </section>
+	    
+	    <footer class="footer text-center py-2 theme-bg-dark">
+		   
+	        <!--/* This template is released under the Creative Commons Attribution 3.0 License. Please keep the attribution link below when using for your own project. Thank you for your support. :) If you'd like to use the template without the attribution, you can buy the commercial license via our website: themes.3rdwavemedia.com */-->
+                <small class="copyright">Designed with <i class="fas fa-heart" style="color: #fb866a;"></i> by <a href="http://themes.3rdwavemedia.com" target="_blank">Xiaoying Riley</a> for developers</small>
+		   
+	    </footer>
+    
+    </div><!--//main-wrapper-->
+    
+    
+    
+    
+    <!-- *****CONFIGURE STYLE (REMOVE ON YOUR PRODUCTION SITE)****** -->  
+    <div id="config-panel" class="config-panel d-none d-lg-block">
+        <div class="panel-inner">
+            <a id="config-trigger" class="config-trigger config-panel-hide text-center" href="#"><i class="fas fa-cog fa-spin mx-auto" data-fa-transform="down-6" ></i></a>
+            <h5 class="panel-title">Choose Colour</h5>
+            <ul id="color-options" class="list-inline mb-0">
+			{% load static %}
+                <li class="theme-1 active list-inline-item"><a data-style="{% static 'css/theme-1.css' %}" href="#"></a></li>
+                <li class="theme-2  list-inline-item"><a data-style="{% static 'css/theme-2.css' %}" href="#"></a></li>
+                <li class="theme-3  list-inline-item"><a data-style="{% static 'css/theme-3.css' %}" href="#"></a></li>
+                <li class="theme-4  list-inline-item"><a data-style="{% static 'css/theme-4.css' %}" href="#"></a></li>
+                <li class="theme-5  list-inline-item"><a data-style="{% static 'css/theme-5.css' %}" href="#"></a></li>
+                <li class="theme-6  list-inline-item"><a data-style="{% static 'css/theme-6.css' %}" href="#"></a></li>
+                <li class="theme-7  list-inline-item"><a data-style="{% static 'css/theme-7.css' %}" href="#"></a></li>
+                <li class="theme-8  list-inline-item"><a data-style="{% static 'css/theme-8.css' %}" href="#"></a></li>
+            </ul>
+            <a id="config-close" class="close" href="#"><i class="fa fa-times-circle"></i></a>
+        </div><!--//panel-inner-->
+    </div><!--//configure-panel-->
+
+{% endblock content %}

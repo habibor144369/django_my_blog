@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %} <title>404 Error Page</title> {% endblock title %}
+
+{% block stylesheet %}
+<style>
+.jumbotron{
+    background-color: #ededed;
+}
+.lead >a{
+    margin-left: 40%;
+}
+</style>
+{% endblock stylesheet %}
+
+{% block content %}
+<div class="jumbotron">
+  <h1 class="display-4 text-center">Page Not Found or 404 -):</h1>
+  <p class="lead text-center">Sorry, This Page is messing or dose not exist, please correct path type you</p>
+  <hr class="my-4">
+  <p class="text-center">It uses utility classes for typography and spacing to space content out within the larger container.</p> <br>
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="{% url 'index' %}" role="button">Go To Home Page</a>
+  </p>
+</div>
+{% endblock content %}
